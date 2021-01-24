@@ -12,7 +12,7 @@
 
 class Helix: public Curve{
 protected:
-	double radius;
+	Circle basement;
 	double step;
 public:
 	Helix(Vector3 position, double radius, double step);

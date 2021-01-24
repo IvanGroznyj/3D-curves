@@ -6,8 +6,8 @@
  */
 
 #include "Circle.h"
-#include "Helix.h"
 #include "Ellipse.h"
+#include "Helix.h"
 
 #include <iostream>
 #include <cmath>
