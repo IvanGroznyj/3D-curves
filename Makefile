@@ -12,7 +12,8 @@ endif
 
 
 CC=g++
-CFLAGS=-c -w -O2
+CFLAGS=-c -O2 -g
+#CFLAGS=-c -g
 ifeq ($(OSFLAG),WIN32)
 	LFLAGS=-pthread -lws2_32
     unit_test_gen = \Tools\cxxtestgen.bat
@@ -51,19 +52,19 @@ info:
 
 ./$(debug_dir)/$(example_src_dir)/%.o: ./$(example_src_dir)/src/%.$(sfext)
 	@echo Compile file: $<
-	@$(CC) $(CFLAGS) $< -o $@ $(includes_dir)
+	$(CC) $(CFLAGS) $< -o $@ $(includes_dir)
 
 ./$(debug_dir)/$(source_dir)/%.o: ./$(source_dir)/src/%.$(sfext)
 	@echo Compile file: $<
-	@$(CC) $(CFLAGS) $< -o $@ $(includes_dir)
+	$(CC) $(CFLAGS) $< -o $@ $(includes_dir)
 
 lib: $(lib_objects)
 	@echo Build lib: $(debug_dir)/$(lib_name)
-	@$(CC) $(debug_dir)/$(source_dir)/*.o -o $(debug_dir)/$(lib_name) $(LFLAGS) -shared
+	$(CC) $(debug_dir)/$(source_dir)/*.o -o $(debug_dir)/$(lib_name) $(LFLAGS) -g -shared
 	
 all: lib $(example_objects)
 	@echo Build executable file: $(debug_dir)/$(EXECUTABLE)
-	@$(CC) $(debug_dir)/$(example_src_dir)/*.o -o $(debug_dir)/$(EXECUTABLE) $(LFLAGS) -L./$(debug_dir) -lcore
+	$(CC) $(debug_dir)/$(example_src_dir)/*.o -o $(debug_dir)/$(EXECUTABLE) $(LFLAGS) -g -L./$(debug_dir) -lcore
 
 #unittests: lib
 #	$(unit_test_gen) --error-printer -o $(EXECUTABLE).$(sfext) $(TESTFILE)

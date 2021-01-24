@@ -17,8 +17,13 @@ public:
 	Ellipse(Vector3 position, double radius_x, double radius_y);
 	~Ellipse();
 
-	virtual Vector3 get_Point_At(double t);
-	virtual Vector3 get_Derivative_At(double t);
+	double get_Radius_X();
+	double get_Radius_Y();
+
+	int compare_To(const Curve &curve);
+
+	Vector3 get_Point_At(double t);
+	Vector3 get_Derivative_At(double t);
 };
 
 #endif /* ELLIPSE_H_ */

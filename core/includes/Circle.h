@@ -17,8 +17,12 @@ public:
 	Circle(Vector3 position, double radius);
 	~Circle();
 
-	virtual Vector3 get_Point_At(double t);
-	virtual Vector3 get_Derivative_At(double t);
+	double get_Radius();
+
+	int compare_To(const Curve &curve);
+
+	Vector3 get_Point_At(double t);
+	Vector3 get_Derivative_At(double t);
 };
 
 

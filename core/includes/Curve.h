@@ -18,6 +18,10 @@ public:
 	Curve(Vector3 position);
 	virtual ~Curve();
 
+	Vector3 get_Position();
+
+	virtual int compare_To(const Curve &curve)=0;
+
 	virtual Vector3 get_Point_At(double t)=0;
 	virtual Vector3 get_Derivative_At(double t)=0;
 };

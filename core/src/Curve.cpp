@@ -13,3 +13,7 @@ Curve::Curve(Vector3 position){
 }
 
 Curve::~Curve(){}
+
+Vector3 Curve::get_Position(){
+	return position;
+}
