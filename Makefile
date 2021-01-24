@@ -1,30 +1,6 @@
-ifeq ($(OS),Windows_NT)
-	OSFLAG=WIN32
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		OSFLAG=LINUX
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		OSFLAG=OSX
-	endif
-endif
-
-
 CC=g++
-CFLAGS=-c -O2 -g
-ifeq ($(OSFLAG),WIN32)
-	LFLAGS=-pthread -lws2_32
-    unit_test_gen = \Tools\cxxtestgen.bat
-    lib_name += libcore.dll
-    del_cmd = del
-else
-	CFLAGS+=-fPIC
-	LFLAGS=-pthread
-    unit_test_gen = cxxtestgen
-    lib_name += libcore.so
-    del_cmd = rm
-endif
+CFLAGS=-c -O2 -g -fPIC
+lib_name=libcore.so
 
 EXECUTABLE=runner
 
@@ -44,7 +20,6 @@ example_objects=$(patsubst ./$(example_src_dir)/src/%.$(sfext), ./$(debug_dir)/$
 .PHONY: info folders lib example unittests clean
 
 info:
-	@echo "$(OSFLAG)"
 	@echo "$(lib_files)"
 	@echo "$(lib_objects)"
 
@@ -69,4 +44,3 @@ all: lib $(example_objects)
 clean:
 	@echo Clean build directory...
 	@rm $(debug_dir)/$(source_dir)/*.o $(debug_dir)/$(example_src_dir)/*.o $(debug_dir)/$(EXECUTABLE)
-	
